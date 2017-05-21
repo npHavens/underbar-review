@@ -280,6 +280,14 @@
       return obj;
     }, obj)
   };
+  //   _.each(args, function(element) {
+  //     _.each(element, function(val, key) {
+
+  //         obj[key] = val;
+  //     })
+  //   });
+  //   return obj;
+  // };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj

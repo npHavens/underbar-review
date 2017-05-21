@@ -230,7 +230,7 @@
           return isTrue;
         }, true);
       }
-      return _.reduce(collection, function (isTrue, item) {
+      return _.reduce(collection, function(isTrue, item) {
         return item;
       })
   };
@@ -240,10 +240,12 @@
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     if (iterator) {
+      //if not every iterator(element) is false
       return !_.every(collection, function(item) {
         return !iterator(item);
       })
     }
+    //if not every element is false
     return !_.every(collection, function(item) {
       return !item;
     })
@@ -271,12 +273,12 @@
   _.extend = function(obj) {
     var args = Array.prototype.slice.call(arguments, 1);
 
-    _.each(args, function(element) {
-      _.each(element, function(key) {
-          obj[key] = element[key];
-      })
-    });
-    return obj;
+    return _.reduce(args, function(orig, newObj) {
+      _.each(newObj, function(val, key) {
+        orig[key] = val;
+      });
+      return obj;
+    }, obj)
   };
 
   // Like extend, but doesn't ever overwrite a key that already

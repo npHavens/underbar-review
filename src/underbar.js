@@ -390,11 +390,7 @@
   _.zip = function(initial) {
     var args = arguments;
 
-    return _.map(initial, function(element, i) {
-      return _.map(args, function(array) {
-        return array[i];
-      })
-    })
+    return _.map(initial, (element, i) => _.map(args, array => array[i]))
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.

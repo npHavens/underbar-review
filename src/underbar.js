@@ -301,18 +301,17 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
-  _.memoize = function(func) {
+  _.memoize = func => {
     var results = {};
 
-    return function() {
-      var args = JSON.stringify(arguments);
+    return (...args) => {
+      var uniqArgs = JSON.stringify(args);
 
-      if (!results[args]) {
-        results[args] = func.apply(this, arguments);
+      if (!results[uniqArgs]) {
+        results[uniqArgs] = func.apply(null, args);
       }
-      return results[args];
+      return results[uniqArgs];
     }
-
   };
 
   // Delays a function for the given number of milliseconds, and then calls

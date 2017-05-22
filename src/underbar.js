@@ -241,13 +241,9 @@
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
-    var args = Array.prototype.slice.call(arguments, 1);
-
+  _.extend = (obj, ...args) => {
     return _.reduce(args, function(orig, newObj) {
-      _.each(newObj, function(val, key) {
-        orig[key] = val;
-      });
+      _.each(newObj, (val, key) => orig[key] = val);
       return obj;
     }, obj)
   };

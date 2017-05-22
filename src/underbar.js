@@ -439,19 +439,19 @@
   // on this function.
   //
   // Note: This is difficult! It may take a while to implement.
-  _.throttle = function(func, wait) {
+  _.throttle = (func, wait, ...args) => {
     var time;
     var result;
 
-    return function() {
+    return () => {
       var newTime = new Date();
 
       if (!time || (newTime - time > wait)) {
-        result = func(arguments);
+        result = func(args);
         time = newTime;
       } else {
         setTimeout(function() {
-          func(arguments);
+          func(args);
         }, wait - newTime - time);
       }
      return result;

@@ -390,16 +390,16 @@
   _.zip = function(initial) {
     var args = arguments;
 
-    return _.map(initial, (element, i) => _.map(args, array => array[i]))
+    return _.map(initial, (element, i) => _.map(args, array => array[i]));
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
   // The new array should contain all elements of the multidimensional array.
   //
   // Hint: Use Array.isArray to check if something is an array
-  _.flatten = function(nestedArray) {
+  _.flatten = nestedArray => {
     var flattened = [];
-    _.each(nestedArray, function(element) {
+    _.each(nestedArray, element => {
       if (Array.isArray(element)) {
         flattened = flattened.concat(_.flatten(element));
       } else {

@@ -422,20 +422,16 @@
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
-  _.difference = function(array) {
-    var args = Array.prototype.slice.call(arguments);
-    var first = args[0];
-    var rest = args.slice(1);
-
-    return _.reduce(first, function(accumulator, element) {
-      if (!_.some(rest, function(array) {
-        return _.contains(array, element);
-      })) {
+  _.difference = (array, ...args) => {
+    //var args = Array.prototype.slice.call(arguments);
+    //var first = args[0];
+   // var rest = args.slice(1);
+    return _.reduce(array, (accumulator, element) => {
+      if (!_.some(args, (arr) => _.contains(arr, element))) {
         accumulator.push(element);
       }
       return accumulator;
     },[]);
-
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once

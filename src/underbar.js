@@ -184,11 +184,11 @@
       if (accumulator === undefined) {
         accumulator = collection[0];
         for (var i = 1; i < collection.length; i++) {
-          accumulator = iterator(accumulator, collection[i])
+          accumulator = iterator(accumulator, collection[i], i)
         }
       } else {
         for (var i = 0; i < collection.length; i++) {
-          accumulator = iterator(accumulator, collection[i])
+          accumulator = iterator(accumulator, collection[i], i)
         }
       }
       return accumulator;
@@ -459,11 +459,22 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var args = Array.prototype.slice.call(arguments);
+
+    return _.reduce(args, function(accumulator, arrayArg, i) {
+      if (_.every(args, function(array) {
+        return _.contains(array, arrayArg[i]);
+      })) {
+        accumulator.push(arrayArg[i]);
+      }
+      return accumulator;
+    },[])
   };
 
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once

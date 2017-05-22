@@ -474,6 +474,18 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var args = Array.prototype.slice.call(arguments);
+    var first = args[0];
+    var rest = args.slice(1);
+
+    return _.reduce(first, function(accumulator, element) {
+      if (!_.some(rest, function(array) {
+        return _.contains(array, element);
+      })) {
+        accumulator.push(element);
+      }
+      return accumulator;
+    },[]);
 
   };
 
@@ -483,5 +495,22 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var time;
+    var result;
+
+    return function() {
+      var newTime = new Date();
+
+      if (!time || (newTime - time > wait)) {
+        result = func(arguments);
+        time = newTime;
+      } else {
+        setTimeout(function() {
+          func(arguments);
+        }, wait - newTime - time);
+      }
+     return result;
+    }
   };
+
 }());

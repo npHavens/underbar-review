@@ -446,13 +446,11 @@
     return () => {
       var newTime = new Date();
 
-      if (!time || (newTime - time > wait)) {
+      if (!time || newTime - time > wait) {
         result = func(args);
         time = newTime;
       } else {
-        setTimeout(function() {
-          func(args);
-        }, wait - newTime - time);
+        setTimeout(() => func(args), wait - newTime - time);
       }
      return result;
     }

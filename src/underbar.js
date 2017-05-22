@@ -370,7 +370,7 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = (collection, iterator) => {
-    return collection.sort(function(a, b, i) {
+    return collection.sort((a, b, i) => {
       if (a === undefined) {
         var val = collection.splice(i, 1)[0];
         collection.push(val);
@@ -446,13 +446,11 @@
     return () => {
       var newTime = new Date();
 
-      if (!time || (newTime - time > wait)) {
+      if (!time || newTime - time > wait) {
         result = func(args);
         time = newTime;
       } else {
-        setTimeout(function() {
-          func(args);
-        }, wait - newTime - time);
+        setTimeout(() => func(args), wait - newTime - time);
       }
      return result;
     }

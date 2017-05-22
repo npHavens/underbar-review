@@ -411,13 +411,9 @@
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
-  _.intersection = function() {
-    var args = Array.prototype.slice.call(arguments);
-
-    return _.reduce(args, function(accumulator, arrayArg, i) {
-      if (_.every(args, function(array) {
-        return _.contains(array, arrayArg[i]);
-      })) {
+  _.intersection = (...args) => {
+    return _.reduce(args, (accumulator, arrayArg, i) => {
+      if (_.every(args, (array) => _.contains(array, arrayArg[i]))) {
         accumulator.push(arrayArg[i]);
       }
       return accumulator;

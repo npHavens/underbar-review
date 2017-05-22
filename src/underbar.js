@@ -457,7 +457,16 @@
   // The new array should contain all elements of the multidimensional array.
   //
   // Hint: Use Array.isArray to check if something is an array
-  _.flatten = function(nestedArray, result) {
+  _.flatten = function(nestedArray) {
+    var flattened = [];
+    _.each(nestedArray, function(element) {
+      if (Array.isArray(element)) {
+        flattened = flattened.concat(_.flatten(element));
+      } else {
+        flattened.push(element);
+      }
+    })
+    return flattened;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains

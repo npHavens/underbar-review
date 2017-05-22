@@ -336,17 +336,13 @@
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
-  _.shuffle = function(array) {
-    var shuffled = [];
+  _.shuffle = array => {
     var copy = array.slice();
 
-    for (var i = 0; i < array.length; i++) {
+    return _.map(array, (element, i) => {
       var randomIndex = Math.floor(Math.random() * (array.length - i));
-      var randomElement = copy.splice(randomIndex, 1)[0];
-
-      shuffled.push(randomElement);
-    };
-    return shuffled;
+      return copy.splice(randomIndex, 1)[0];
+    });
   };
 
 

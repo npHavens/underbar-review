@@ -125,8 +125,8 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var mapped = [];
-    _.each(collection, function(element) {
-      mapped.push(iterator(element));
+    _.each(collection, function(element, i) {
+      mapped.push(iterator(element, i));
     })
     return mapped;
   };
@@ -450,7 +450,14 @@
   //
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
-  _.zip = function(args) {
+  _.zip = function(initial) {
+    var args = arguments;
+
+    return _.map(initial, function(element, i) {
+      return _.map(args, function(array) {
+        return array[i];
+      })
+    })
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
